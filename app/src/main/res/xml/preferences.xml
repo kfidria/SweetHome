@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="Username">
+
+        <EditTextPreference
+            android:dialogTitle="@string/username"
+            android:dialogMessage="Please enter your Username"
+            android:defaultValue="Guest"
+            android:summary="Username for logging in to this app"
+            android:title="Username"
+            android:key="@string/username"/>
+
+        <ListPreference
+            android:key="@string/theme"
+            android:defaultValue="1"
+            android:title="@string/theme"
+            android:summary="ListPreference summary"
+            android:entries="@array/listentries"
+            android:entryValues="@array/listvalues" />
+
+</PreferenceScreen>
