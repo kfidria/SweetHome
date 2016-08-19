@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/border"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip"
+    android:gravity="center|start">
+
+    <TextView
+        android:id="@+id/text_group_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/image_item"
+        android:contentDescription="@string/sample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_pressure"
+        android:layout_below="@+id/text_group_id"
+        android:layout_marginLeft="10dp"
+        android:background="#00ffffff" />
+
+    <TextView
+        android:id="@+id/text_title"
+        android:textAllCaps="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/image_item" />
+
+    <TextView
+        android:id="@+id/text_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:text="@string/sample"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="10dp" />
+
+</RelativeLayout>
