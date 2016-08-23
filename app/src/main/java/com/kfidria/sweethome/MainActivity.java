@@ -16,6 +16,7 @@ import android.util.Log;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -27,21 +28,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        int color = 0;
-        change = false;
-        currentTheme = getThemes();
-            switch (getThemes()) {
-                case 1:
-                    setTheme(R.style.AppThemePurple);
 
-                    color = getResources().getColor(R.color.purple);
-                    break;
-                case 2:
-                    //Yellow Tigger
-                    setTheme(R.style.AppThemeYellow);
-                    color = getResources().getColor(R.color.yellow);
-                    break;
-            }
+         //Yellow Tigger
+        setTheme(R.style.AppThemeYellow);
+        int color = getResources().getColor(R.color.yellow);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -63,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setSubtitleTextColor(color);
         setSupportActionBar(toolbar);
         //setActionBar(toolbar);
-        mPrefs.registerOnSharedPreferenceChangeListener(mSharedPreferencesListener);
+     //   mPrefs.registerOnSharedPreferenceChangeListener(mSharedPreferencesListener);
     }
 
     @Override
@@ -82,12 +72,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_settings:
-                PrefFragment preferenceFragment = new PrefFragment();
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, preferenceFragment, "Preferences")
-                        .addToBackStack("Fragment")
-                        .commit();
+       //         PrefFragment preferenceFragment = new PrefFragment();
+        //        FragmentManager fragmentManager = getFragmentManager();
+       //         fragmentManager.beginTransaction()
+        //                .replace(R.id.fragment_container, preferenceFragment, "Preferences")
+        //                .addToBackStack("Fragment")
+        //                .commit();
 
         }
 
@@ -112,26 +102,15 @@ public class MainActivity extends AppCompatActivity {
     public void getPrefs() {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-   //     String msg = "username = " + mPrefs.getString("Username", "NULL") + ", theme = "
-    //            + mPrefs.getString("Theme", "Null") + ", self_destruct = "
-    //            + mPrefs.getBoolean("self_destruct", false);
+        String msg = "username = "
+                + mPrefs.getString("Username", "NULL")
+                + ", theme = "
+                + mPrefs.getString("Theme", "Null")
+                + ", self_destruct = "
+                + mPrefs.getBoolean("self_destruct", false);
 
-//        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
-        if (change = true) {
-            change = false;
-            Intent intent = getIntent();
-            finish();
-            startActivity(intent);
-        }
-
-    }
-
-    public int getThemes() {
-        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        Log.d(TAG, "getThemes " + mPrefs.getString("Theme", "1"));
-
-        return 2;
     }
 
     private SharedPreferences.OnSharedPreferenceChangeListener mSharedPreferencesListener =
@@ -139,12 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                 public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
 
-                    if (key.equals("Theme")) {
-                        if (String.valueOf(currentTheme) != prefs.getString(key, "1")) {
-                            change = true;
-//                           getPrefs();
-                        }
-                    }
+                          getPrefs();
 
                 }
             };

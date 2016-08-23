@@ -101,7 +101,7 @@ public class OneItemFragment extends ListFragment {
         Log.d(TAG,  "Array after sort " + String.valueOf(chartValues ));
         double max = 0;
         for (int i = 0; i < chartValues.size(); i++) {
-            Log.d(TAG, "Value" + chartValues.get(i) );
+            //Log.d(TAG, "Value" + chartValues.get(i) );
             Entry val =
                     new Entry(Float.valueOf(chartValues.get(i)), i);
             if (Double.valueOf(chartValues.get(i)) > max){
@@ -140,23 +140,41 @@ public class OneItemFragment extends ListFragment {
                 .setAxisMinValue(-0.5f);
         chart.getXAxis()
                 .setDrawLabels(false);
-
-        chart.getAxisLeft()
-                .setAxisMinValue((float) (min-1/(max-min)));
-        chart.getAxisRight()
-                .setAxisMinValue((float) (min-1/(max-min)));
-
-        if (min > 0) {
+        if (max != min) {
             chart.getAxisLeft()
-                    .setAxisMaxValue((float) (max+1/(max-min)));
+                    .setAxisMinValue((float) (min - 1 / (max - min)));
             chart.getAxisRight()
-                    .setAxisMaxValue((float) (max+1/(max-min)));
+                    .setAxisMinValue((float) (min - 1 / (max - min)));
+            if (min > 0) {
+                chart.getAxisLeft()
+                        .setAxisMaxValue((float) (max+1/(max-min)));
+                chart.getAxisRight()
+                        .setAxisMaxValue((float) (max+1/(max-min)));
+            } else {
+                chart.getAxisLeft()
+                        .setAxisMaxValue((float) (max-0.05*min));
+                chart.getAxisRight()
+                        .setAxisMaxValue((float) (max-0.05*min));
+            }
         } else {
             chart.getAxisLeft()
-                    .setAxisMaxValue((float) (max-0.05*min));
+                    .setAxisMinValue((float) (min * 0.95 ));
             chart.getAxisRight()
-                    .setAxisMaxValue((float) (max-0.05*min));
+                    .setAxisMinValue((float) (min * 0.95 ));
+            if (min > 0) {
+                chart.getAxisLeft()
+                        .setAxisMaxValue((float) (min * 1.05));
+                chart.getAxisRight()
+                        .setAxisMaxValue((float) (min * 1.05));
+            } else {
+                chart.getAxisLeft()
+                        .setAxisMaxValue((float) (0.95*min));
+                chart.getAxisRight()
+                        .setAxisMaxValue((float) (0.95*min));
+            }
         }
+
+
         chart.getAxisRight()
                 .setTextColor(color);
         chart.getAxisLeft()
